@@ -1,0 +1,46 @@
+services:
+  #  --------------------------------------------
+  application:
+    build:
+      context: ./monolithicDocker
+      dockerfile: Dockerfile
+    container_name: java-application
+    depends_on:
+      mysql-1:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+  #  --------------------------------------------
+  mysql-1:
+    build:
+      context: ./MySQL
+      dockerfile: Dockerfile
+    container_name: mysql-db-1
+    volumes:
+      - ./MySQL/mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD","mysql", "-u", "root", "-ppasswordRoot" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  #  --------------------------------------------
+  adminer-1:
+    image: adminer
+    container_name: adminer-1
+    depends_on:
+      - mysql-1
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+#  --------------------------------------------
+networks:
+  app-network:
+    driver: bridge
+    name: app-network
