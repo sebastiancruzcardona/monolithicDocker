@@ -9,7 +9,7 @@ services:
       mysql-1:
         condition: service_healthy
     ports:
-      - "8080:8080"
+      - "8087:8080"
     networks:
       - app-network
   #  --------------------------------------------
@@ -21,7 +21,7 @@ services:
     volumes:
       - ./MySQL/mysql_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - app-network
     healthcheck:
@@ -36,7 +36,7 @@ services:
     depends_on:
       - mysql-1
     ports:
-      - "8081:8080"
+      - "8082:8080"
     networks:
       - app-network
 #  --------------------------------------------
