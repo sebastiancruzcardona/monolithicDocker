@@ -31,7 +31,13 @@ jobs:
             git clone https://github.com/sebastiancruzcardona/monolithicDocker.git /home/ubuntu/cruz-rodriguez;
           fi
 
+          cd /home/ubuntu/cruz-rodriguez &&
 
-          docker compose build
+          git checkout main &&
+          git fetch --all &&
+          git reset --hard origin/main &&
+          git pull origin main &&
+
+          docker compose build &&
           docker compose up -d
           '
