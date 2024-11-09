@@ -1,10 +1,10 @@
 services:
   #  --------------------------------------------
-  java-application:
+  java-app-cruz-rodriguez:
     build:
       context: ./monolithicDocker
       dockerfile: Dockerfile
-    container_name: java-application
+    container_name: java-app-cruz-rodriguez
     depends_on:
       mysql-1:
         condition: service_healthy
