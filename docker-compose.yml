@@ -1,6 +1,6 @@
 services:
   #  --------------------------------------------
-  application:
+  java-application:
     build:
       context: ./monolithicDocker
       dockerfile: Dockerfile
